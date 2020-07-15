@@ -1,4 +1,6 @@
-﻿namespace Codibly.Services.Mailer.Domain.Model
+﻿using System;
+
+namespace Codibly.Services.Mailer.Domain.Model
 {
     public class MessageBody
     {
@@ -11,7 +13,24 @@
             this.IsHtml = isHtml;
         }
 
-        public static MessageBody CreateHtmlBody(string htmlBody) => new MessageBody(htmlBody, true);
-        public static MessageBody CreateTextBody(string body) => new MessageBody(body);
+        public static MessageBody CreateHtmlBody(string body)
+        {
+            ValidateBody(body);
+            return new MessageBody(body, true);
+        }
+
+        public static MessageBody CreateTextBody(string body)
+        {
+            ValidateBody(body);
+            return new MessageBody(body);
+        }
+
+        private static void ValidateBody(string body)
+        {
+            if (string.IsNullOrWhiteSpace(body))
+            {
+                throw new ArgumentNullException(nameof(body), "Body cannot be empty");
+            }
+        }
     }
 }

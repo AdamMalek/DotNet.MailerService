@@ -3,7 +3,7 @@ using System.Linq;
 using Codibly.Services.Mailer.Domain.Model;
 using NUnit.Framework;
 
-namespace Codibly.Services.Mailer.Tests
+namespace Codibly.Services.Mailer.Tests.Domain
 {
     public class EmailMessageTests
     {
