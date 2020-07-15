@@ -1,4 +1,5 @@
 using Codibly.Services.Mailer.Application.Commands;
+using Codibly.Services.Mailer.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,6 +22,8 @@ namespace Codibly.Services.Mailer.Host
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddInfrastructure();
+            
             services.AddMediatR(typeof(Startup), typeof(ICommand));
             services.AddControllers();
             services.AddSwaggerGen(c =>

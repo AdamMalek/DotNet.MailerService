@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codibly.Services.Mailer.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codibly.Services.Mailer.Application", "src/Codibly.Services.Mailer.Application\Codibly.Services.Mailer.Application.csproj", "{F3E54E63-DBCB-457A-B1E5-740997F650FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codibly.Services.Mailer.Infrastructure", "src\Codibly.Services.Mailer.Infrastructure\Codibly.Services.Mailer.Infrastructure.csproj", "{BF60222B-5740-45A4-834C-45AEBBA71549}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{F3E54E63-DBCB-457A-B1E5-740997F650FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3E54E63-DBCB-457A-B1E5-740997F650FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3E54E63-DBCB-457A-B1E5-740997F650FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF60222B-5740-45A4-834C-45AEBBA71549}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF60222B-5740-45A4-834C-45AEBBA71549}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF60222B-5740-45A4-834C-45AEBBA71549}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF60222B-5740-45A4-834C-45AEBBA71549}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

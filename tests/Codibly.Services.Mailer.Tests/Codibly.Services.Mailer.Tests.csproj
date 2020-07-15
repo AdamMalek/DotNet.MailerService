@@ -13,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Codibly.Services.Mailer.Domain\Codibly.Services.Mailer.Domain.csproj" />
+      <ProjectReference Include="..\..\src\Codibly.Services.Mailer.Domain\Codibly.Services.Mailer.Domain.csproj" />
     </ItemGroup>
 
 </Project>

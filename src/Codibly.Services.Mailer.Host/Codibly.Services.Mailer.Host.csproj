@@ -7,6 +7,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Codibly.Services.Mailer.Application\Codibly.Services.Mailer.Application.csproj" />
       <ProjectReference Include="..\Codibly.Services.Mailer.Domain\Codibly.Services.Mailer.Domain.csproj" />
+      <ProjectReference Include="..\Codibly.Services.Mailer.Infrastructure\Codibly.Services.Mailer.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>

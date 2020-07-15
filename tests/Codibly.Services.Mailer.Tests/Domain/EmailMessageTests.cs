@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Codibly.Services.Mailer.Domain.Exceptions;
 using Codibly.Services.Mailer.Domain.Model;
