@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Codibly.Services.Mailer.Domain.Adapters;
 using Codibly.Services.Mailer.Domain.Model;
+using Codibly.Services.Mailer.Domain.Repositories;
 using MediatR;
 
-namespace Codibly.Services.Mailer.Domain.Commands
+namespace Codibly.Services.Mailer.Application.Commands
 {
     public class CreateEmailMessage : ICommand
     {
@@ -32,7 +32,7 @@ namespace Codibly.Services.Mailer.Domain.Commands
         {
             private readonly IEmailRepository repository;
 
-            public Handler()
+            public Handler(IEmailRepository repository)
             {
                 this.repository = repository;
             }

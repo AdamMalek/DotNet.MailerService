@@ -1,7 +1,6 @@
-﻿using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 
-namespace Codibly.Services.Mailer.Domain.Commands
+namespace Codibly.Services.Mailer.Application.Commands
 {
     public interface ICommand: IRequest
     {
