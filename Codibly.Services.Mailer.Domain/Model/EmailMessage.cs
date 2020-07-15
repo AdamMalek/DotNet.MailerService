@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Codibly.Services.Mailer.Domain.Exceptions;
 
 namespace Codibly.Services.Mailer.Domain.Model
 {
@@ -55,10 +56,10 @@ namespace Codibly.Services.Mailer.Domain.Model
 
         public void FinalizeMessage()
         {
-            if (this.recipients.Any() == false) throw new ArgumentException(nameof(this.Recipients));
-            if (this.Sender is null) throw new ArgumentException(nameof(this.Sender));
-            if (this.Body is null) throw new ArgumentException(nameof(this.Body));
-            if (string.IsNullOrWhiteSpace(Subject)) throw new ArgumentException(nameof(this.Subject));
+            if (this.recipients.Any() == false) throw new NoRecipientsException();
+            if (this.Sender is null) throw new NoSenderException();
+            if (this.Body is null) throw new EmptyMessageBodyException();
+            if (string.IsNullOrWhiteSpace(Subject)) throw new EmptySubjectException();
 
             this.Status = MessageStatus.Queued;
         }
@@ -71,6 +72,36 @@ namespace Codibly.Services.Mailer.Domain.Model
         public void AddRecipient(EmailAddress address)
         {
             this.recipients.Add(address);
+        }
+
+        public void UpdateBody(MessageBody body)
+        {
+            this.CheckIfNotSent();
+            if (body is null)
+            {
+                throw new EmptyMessageBodyException();
+            }
+
+            this.Body = body;
+        }
+
+        public void UpdateSubject(string subject)
+        {
+            this.CheckIfNotSent();
+            if (string.IsNullOrWhiteSpace(subject))
+            {
+                throw new EmptySubjectException();
+            }
+
+            this.Subject = subject;
+        }
+
+        private void CheckIfNotSent()
+        {
+            if (this.Status != MessageStatus.Pending)
+            {
+                throw new MessageAlreadySentException();
+            }
         }
     }
 }

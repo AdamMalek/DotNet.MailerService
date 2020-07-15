@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Codibly.Services.Mailer.Domain.Exceptions;
 using Codibly.Services.Mailer.Domain.Model;
 using NUnit.Framework;
 
@@ -36,7 +37,7 @@ namespace Codibly.Services.Mailer.Tests.Domain
             [Values("", null, "                 ", "\n")]
             string body)
         {
-            Assert.Catch<ArgumentNullException>(() => { MessageBody.CreateHtmlBody(body); });
+            Assert.Catch<EmptyMessageBodyException>(() => { MessageBody.CreateHtmlBody(body); });
         }
 
         [Test]
@@ -44,7 +45,7 @@ namespace Codibly.Services.Mailer.Tests.Domain
             [Values("", null, "                 ", "\n")]
             string body)
         {
-            Assert.Catch<ArgumentNullException>(() => { MessageBody.CreateTextBody(body); });
+            Assert.Catch<EmptyMessageBodyException>(() => { MessageBody.CreateTextBody(body); });
         }
     }
 }

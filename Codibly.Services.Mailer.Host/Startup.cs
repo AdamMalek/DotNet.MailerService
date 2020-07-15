@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace Codibly.Services.Mailer.Host
 {
@@ -30,6 +31,10 @@ namespace Codibly.Services.Mailer.Host
         {
             services.AddMediatR(typeof(Startup), typeof(ICommand));
             services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Codibly.Services.Mailer", Version = "v1",});
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -38,6 +43,10 @@ namespace Codibly.Services.Mailer.Host
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Codibly.Services.Mailer"); });
 
             app.UseHttpsRedirection();
 

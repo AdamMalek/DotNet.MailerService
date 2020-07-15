@@ -1,4 +1,5 @@
 ﻿using System;
+using Codibly.Services.Mailer.Domain.Exceptions;
 
 namespace Codibly.Services.Mailer.Domain.Model
 {
@@ -29,7 +30,7 @@ namespace Codibly.Services.Mailer.Domain.Model
         {
             if (string.IsNullOrWhiteSpace(body))
             {
-                throw new ArgumentNullException(nameof(body), "Body cannot be empty");
+                throw new EmptyMessageBodyException();
             }
         }
     }

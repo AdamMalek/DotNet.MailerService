@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Codibly.Services.Mailer.Domain.Exceptions;
 using Codibly.Services.Mailer.Domain.Model;
 using NUnit.Framework;
 
@@ -30,7 +31,7 @@ namespace Codibly.Services.Mailer.Tests.Domain
                 sender: new EmailAddress("sender@test.com"),
                 recipients: new[] {recipient});
 
-            Assert.Catch<Exception>(() => { message.FinalizeMessage(); });
+            Assert.Catch<EmptySubjectException>(() => { message.FinalizeMessage(); });
         }
 
         [Test]
@@ -43,7 +44,7 @@ namespace Codibly.Services.Mailer.Tests.Domain
                 sender: new EmailAddress("sender@test.com"),
                 recipients: new[] {recipient});
 
-            Assert.Catch<Exception>(() => { message.FinalizeMessage(); });
+            Assert.Catch<EmptyMessageBodyException>(() => { message.FinalizeMessage(); });
         }
 
         [Test]
@@ -56,7 +57,7 @@ namespace Codibly.Services.Mailer.Tests.Domain
                 sender: null,
                 recipients: new[] {recipient});
 
-            Assert.Catch<Exception>(() => { message.FinalizeMessage(); });
+            Assert.Catch<NoSenderException>(() => { message.FinalizeMessage(); });
         }
 
         [Test]
@@ -69,7 +70,7 @@ namespace Codibly.Services.Mailer.Tests.Domain
                 sender: new EmailAddress("sender@test.com"),
                 recipients: null);
 
-            Assert.Catch<Exception>(() => { message.FinalizeMessage(); });
+            Assert.Catch<NoRecipientsException>(() => { message.FinalizeMessage(); });
         }
         
         [Test]

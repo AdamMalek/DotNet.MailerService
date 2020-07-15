@@ -6,9 +6,7 @@ namespace Codibly.Services.Mailer.Domain.Adapters
 {
     public interface IEmailRepository
     {
-        IEnumerable<EmailMessage> GetAllMessages();
-        IEnumerable<EmailMessage> GetPendingMessages();
-        EmailMessage GetMessageById(string id);
+        Task<EmailMessage> GetMessageByIdAsync(string id);
 
         Task InsertMessageAsync(EmailMessage message);
         Task UpdateMessageAsync(EmailMessage message);
