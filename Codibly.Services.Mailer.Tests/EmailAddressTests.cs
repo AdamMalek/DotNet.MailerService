@@ -7,10 +7,9 @@ namespace Codibly.Services.Mailer.Tests
     public class EmailAddressTests
     {
         [Test]
-        public void GivenCorrectEmailAddress_ShouldCreateInstance()
+        public void GivenCorrectEmailAddress_ShouldCreateInstance(
+            [Values("test@test.com", "fdsafdasfs132321@gmail.com")] string emailAddress)
         {
-            const string emailAddress = "test@test.com";
-
             var instance = EmailAddress.Create(emailAddress);
 
             Assert.That(instance, Is.Not.Null);
@@ -18,10 +17,9 @@ namespace Codibly.Services.Mailer.Tests
         }
 
         [Test]
-        public void GivenIncorrectEmailAddress_ShouldThrowException()
+        public void GivenIncorrectEmailAddress_ShouldThrowException(
+            [Values("fdsafds", "", null, "fdsa_pl", "testtest.com", "😀@test.com")] string emailAddress)
         {
-            const string emailAddress = "testtest.com";
-
             Assert.Catch<ArgumentException>(() => { EmailAddress.Create(emailAddress); });
         }
     }

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Codibly.Services.Mailer.Domain.Model;
 using NUnit.Framework;
 
@@ -7,22 +8,85 @@ namespace Codibly.Services.Mailer.Tests
     public class EmailMessageTests
     {
         [Test]
-        public void GivenCorrectEmailAddress_ShouldCreateInstance()
+        public void GivenCompleteEmail_WhenFinalizing_ShouldSucceed()
         {
-            const string emailAddress = "test@test.com";
+            var recipient = new EmailAddress("test@test.com");
 
-            var instance = EmailAddress.Create(emailAddress);
+            var message = EmailMessage.CreatePending(subject: "Test",
+                body: MessageBody.CreateTextBody("This is test message"),
+                sender: new EmailAddress("sender@test.com"),
+                recipients: new[] {recipient});
 
-            Assert.That(instance, Is.Not.Null);
-            Assert.That(instance.Value, Is.EqualTo(emailAddress));
+            Assert.DoesNotThrow(() => { message.FinalizeMessage(); });
         }
 
         [Test]
-        public void GivenIncorrectEmailAddress_ShouldThrowException()
+        public void GivenEmailWithoutSubject_WhenFinalizing_ShouldFail()
         {
-            const string emailAddress = "testtest.com";
+            var recipient = new EmailAddress("test@test.com");
 
-            Assert.Catch<ArgumentException>(() => { EmailAddress.Create(emailAddress); });
+            var message = EmailMessage.CreatePending(subject: null,
+                body: MessageBody.CreateTextBody("This is test message"),
+                sender: new EmailAddress("sender@test.com"),
+                recipients: new[] {recipient});
+
+            Assert.Catch<Exception>(() => { message.FinalizeMessage(); });
+        }
+
+        [Test]
+        public void GivenEmailWithoutBody_WhenFinalizing_ShouldFail()
+        {
+            var recipient = new EmailAddress("test@test.com");
+
+            var message = EmailMessage.CreatePending(subject: "Test",
+                body: null,
+                sender: new EmailAddress("sender@test.com"),
+                recipients: new[] {recipient});
+
+            Assert.Catch<Exception>(() => { message.FinalizeMessage(); });
+        }
+
+        [Test]
+        public void GivenEmailWithoutSender_WhenFinalizing_ShouldFail()
+        {
+            var recipient = new EmailAddress("test@test.com");
+
+            var message = EmailMessage.CreatePending(subject: "Test",
+                body: MessageBody.CreateTextBody("This is test message"),
+                sender: null,
+                recipients: new[] {recipient});
+
+            Assert.Catch<Exception>(() => { message.FinalizeMessage(); });
+        }
+
+        [Test]
+        public void GivenEmailWithoutRecipients_WhenFinalizing_ShouldSucceed()
+        {
+            var recipient = new EmailAddress("test@test.com");
+
+            var message = EmailMessage.CreatePending(subject: "Test",
+                body: MessageBody.CreateTextBody("This is test message"),
+                sender: new EmailAddress("sender@test.com"),
+                recipients: null);
+
+            Assert.Catch<Exception>(() => { message.FinalizeMessage(); });
+        }
+        
+        [Test]
+        public void GivenTwoSameRecipients_ShouldStoreOne()
+        {
+            const string emailAddress = "test@test.com";
+            var recipient = new EmailAddress(emailAddress);
+            var recipient2 = new EmailAddress(emailAddress);
+
+            var message = EmailMessage.CreatePending(subject: "Test",
+                body: MessageBody.CreateTextBody("This is test message"),
+                sender: new EmailAddress("sender@test.com"),
+                recipients: new[] {recipient});
+
+            message.AddRecipient(recipient2);
+
+            Assert.That(message.Recipients.Count(), Is.EqualTo(1));
         }
     }
 }

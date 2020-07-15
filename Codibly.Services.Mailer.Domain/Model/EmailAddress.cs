@@ -9,6 +9,7 @@ namespace Codibly.Services.Mailer.Domain.Model
     {
         public string Value { get; private set; }
 
+        protected EmailAddress(){}
         internal EmailAddress(string value)
         {
             this.Value = value;
