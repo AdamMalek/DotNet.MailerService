@@ -7,7 +7,7 @@ namespace Codibly.Services.Mailer.Domain.Model
     {
         public string Id { get; private set; }
         public string Subject { get; private set; }
-        public string Sender { get; private set; }
+        public EmailAddress Sender { get; private set; }
         private readonly HashSet<EmailAddress> recipients;
         public IEnumerable<EmailAddress> Recipients => this.recipients.AsEnumerable();
 

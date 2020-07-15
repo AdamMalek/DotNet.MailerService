@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
+[assembly: InternalsVisibleTo("Codibly.Services.Mailer.Tests")]
 namespace Codibly.Services.Mailer.Domain.Model
 {
-    internal class EmailAddress : IEquatable<EmailAddress>
+    public class EmailAddress : IEquatable<EmailAddress>
     {
         public string Value { get; private set; }
 

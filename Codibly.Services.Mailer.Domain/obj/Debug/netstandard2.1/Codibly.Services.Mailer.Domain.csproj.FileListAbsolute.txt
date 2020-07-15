@@ -1,0 +1,8 @@
+C:\repos\Codibly.Services.Mailer\Codibly.Services.Mailer.Domain\obj\Debug\netstandard2.1\Codibly.Services.Mailer.Domain.csprojAssemblyReference.cache
+C:\repos\Codibly.Services.Mailer\Codibly.Services.Mailer.Domain\obj\Debug\netstandard2.1\Codibly.Services.Mailer.Domain.AssemblyInfoInputs.cache
+C:\repos\Codibly.Services.Mailer\Codibly.Services.Mailer.Domain\obj\Debug\netstandard2.1\Codibly.Services.Mailer.Domain.AssemblyInfo.cs
+C:\repos\Codibly.Services.Mailer\Codibly.Services.Mailer.Domain\bin\Debug\netstandard2.1\Codibly.Services.Mailer.Domain.deps.json
+C:\repos\Codibly.Services.Mailer\Codibly.Services.Mailer.Domain\bin\Debug\netstandard2.1\Codibly.Services.Mailer.Domain.dll
+C:\repos\Codibly.Services.Mailer\Codibly.Services.Mailer.Domain\bin\Debug\netstandard2.1\Codibly.Services.Mailer.Domain.pdb
+C:\repos\Codibly.Services.Mailer\Codibly.Services.Mailer.Domain\obj\Debug\netstandard2.1\Codibly.Services.Mailer.Domain.dll
+C:\repos\Codibly.Services.Mailer\Codibly.Services.Mailer.Domain\obj\Debug\netstandard2.1\Codibly.Services.Mailer.Domain.pdb
