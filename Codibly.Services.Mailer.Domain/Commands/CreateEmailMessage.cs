@@ -1,10 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Net.Mail;
-using System.Runtime.Serialization;
 using System.Threading.Tasks;
-using System.Xml.XPath;
 using Codibly.Services.Mailer.Domain.Adapters;
 using Codibly.Services.Mailer.Domain.Model;
 
@@ -29,36 +25,38 @@ namespace Codibly.Services.Mailer.Domain.Commands
             this.IsPendingEmail = isPendingEmail;
             this.Recipients = recipients;
         }
-    }
 
-    class Handler : ICommandHandler<CreateEmailMessage>
-    {
-        private readonly IEmailRepository repository;
-
-        public Handler(IEmailRepository repository)
+        public class Handler : ICommandHandler<CreateEmailMessage>
         {
-            this.repository = repository;
-        }
+            private readonly IEmailRepository repository;
 
-        public async Task HandleCommandAsync(CreateEmailMessage command)
-        {
-            var messageBody = GetMessageBody(command.Body, command.IsHtmlBody);
-            var sender = command.Sender != null ? EmailAddress.Create(command.Sender) : null;
-            var recipients = command.Recipients?.Select(EmailAddress.Create);
-
-            var message = command.IsPendingEmail
-                ? EmailMessage.CreatePending(command.Subject, messageBody, sender, recipients)
-                : EmailMessage.Create(command.Subject, messageBody, sender, recipients);
-
-            await this.repository.SaveMessageAsync(message);
-        }
-
-        private static MessageBody GetMessageBody(string body, bool? isHtml) =>
-            (isHtml.HasValue, isHtml.HasValue && isHtml.Value) switch
+            public Handler()
             {
-                (true, true) => MessageBody.CreateHtmlBody(body),
-                (true, false) => MessageBody.CreateTextBody(body),
-                (false, _) => null
-            };
+                this.repository = null; //repository;
+            }
+
+            public async Task HandleCommandAsync(CreateEmailMessage command)
+            {
+                var messageBody = GetMessageBody(command.Body, command.IsHtmlBody);
+                var sender = EmailAddress.Create(command.Sender);
+                var recipients = command.Recipients?
+                    .Select(EmailAddress.Create)
+                    .Where(x => !(x is null));
+
+                var message = command.IsPendingEmail
+                    ? EmailMessage.CreatePending(command.Subject, messageBody, sender, recipients)
+                    : EmailMessage.Create(command.Subject, messageBody, sender, recipients);
+
+                await this.repository.InsertMessageAsync(message);
+            }
+
+            private static MessageBody GetMessageBody(string body, bool? isHtml) =>
+                (isHtml.HasValue, isHtml.HasValue && isHtml.Value) switch
+                {
+                    (true, true) => MessageBody.CreateHtmlBody(body),
+                    (true, false) => MessageBody.CreateTextBody(body),
+                    (false, _) => null
+                };
+        }
     }
 }

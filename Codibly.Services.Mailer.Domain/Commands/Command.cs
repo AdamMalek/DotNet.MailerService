@@ -6,7 +6,11 @@ namespace Codibly.Services.Mailer.Domain.Commands
     {
     }
 
-    public interface ICommandHandler<T> where T : ICommand
+    public interface ICommandHandler
+    {
+    }
+
+    public interface ICommandHandler<in T> : ICommandHandler where T : ICommand
     {
         Task HandleCommandAsync(T command);
     }

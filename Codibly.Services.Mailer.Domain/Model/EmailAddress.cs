@@ -21,6 +21,8 @@ namespace Codibly.Services.Mailer.Domain.Model
 
         public static EmailAddress Create(string emailAddress)
         {
+            if (emailAddress is null) return null;
+
             if (IsValid(emailAddress) == false)
             {
                 throw new ArgumentException("Provided e-mail address is not correct", nameof(emailAddress));

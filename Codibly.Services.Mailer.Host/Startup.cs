@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Codibly.Services.Mailer.Domain.Adapters;
+using Codibly.Services.Mailer.Domain.Commands;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -25,6 +27,24 @@ namespace Codibly.Services.Mailer.Host
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var commandHandlers = typeof(ICommandHandler)
+                .Assembly
+                .GetTypes()
+                .Where(x => !x.IsAbstract && x.IsClass)
+                .Where(x => typeof(ICommandHandler).IsAssignableFrom(x))
+                .ToList();
+
+
+            foreach (var commandHandler in commandHandlers)
+            {
+                foreach (var @interface in commandHandler.GetInterfaces())
+                {
+                    services.AddTransient(@interface, commandHandler);
+                }
+
+                services.AddScoped(commandHandler);
+            }
+
             services.AddControllers();
         }
 

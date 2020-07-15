@@ -8,7 +8,9 @@ namespace Codibly.Services.Mailer.Domain.Adapters
     {
         IEnumerable<EmailMessage> GetAllMessages();
         IEnumerable<EmailMessage> GetPendingMessages();
+        EmailMessage GetMessageById(string id);
 
-        Task SaveMessageAsync(EmailMessage message);
+        Task InsertMessageAsync(EmailMessage message);
+        Task UpdateMessageAsync(EmailMessage message);
     }
 }
