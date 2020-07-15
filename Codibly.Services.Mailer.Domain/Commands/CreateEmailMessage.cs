@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Codibly.Services.Mailer.Domain.Adapters;
 using Codibly.Services.Mailer.Domain.Model;
+using MediatR;
 
 namespace Codibly.Services.Mailer.Domain.Commands
 {
@@ -32,10 +34,10 @@ namespace Codibly.Services.Mailer.Domain.Commands
 
             public Handler()
             {
-                this.repository = null; //repository;
+                this.repository = repository;
             }
 
-            public async Task HandleCommandAsync(CreateEmailMessage command)
+            public async Task<Unit> Handle(CreateEmailMessage command, CancellationToken cancellationToken)
             {
                 var messageBody = GetMessageBody(command.Body, command.IsHtmlBody);
                 var sender = EmailAddress.Create(command.Sender);
@@ -48,6 +50,8 @@ namespace Codibly.Services.Mailer.Domain.Commands
                     : EmailMessage.Create(command.Subject, messageBody, sender, recipients);
 
                 await this.repository.InsertMessageAsync(message);
+                
+                return Unit.Value;
             }
 
             private static MessageBody GetMessageBody(string body, bool? isHtml) =>

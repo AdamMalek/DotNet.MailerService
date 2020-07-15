@@ -8,5 +8,10 @@
       <ProjectReference Include="..\Codibly.Services.Mailer.Domain\Codibly.Services.Mailer.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="8.0.2" />
+      <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
+    </ItemGroup>
+
 
 </Project>

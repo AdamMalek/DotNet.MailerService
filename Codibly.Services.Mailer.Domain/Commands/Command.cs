@@ -1,17 +1,13 @@
 ﻿using System.Threading.Tasks;
+using MediatR;
 
 namespace Codibly.Services.Mailer.Domain.Commands
 {
-    public interface ICommand
+    public interface ICommand: IRequest
     {
     }
-
-    public interface ICommandHandler
+    
+    public interface ICommandHandler<in T> : IRequestHandler<T> where T : IRequest
     {
-    }
-
-    public interface ICommandHandler<in T> : ICommandHandler where T : ICommand
-    {
-        Task HandleCommandAsync(T command);
     }
 }
