@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
+[assembly: InternalsVisibleTo("Codibly.Services.Mailer.Infrastructure")]
 [assembly: InternalsVisibleTo("Codibly.Services.Mailer.Tests")]
 
 namespace Codibly.Services.Mailer.Domain.Model

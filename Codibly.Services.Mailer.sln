@@ -1,12 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codibly.Services.Mailer.Host", "Codibly.Services.Mailer.Host\Codibly.Services.Mailer.Host.csproj", "{66383C59-46BC-447A-8D03-E6EED85C6458}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codibly.Services.Mailer.Host", "src/Codibly.Services.Mailer.Host\Codibly.Services.Mailer.Host.csproj", "{66383C59-46BC-447A-8D03-E6EED85C6458}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codibly.Services.Mailer.Domain", "Codibly.Services.Mailer.Domain\Codibly.Services.Mailer.Domain.csproj", "{0BEBC4AC-C57E-48CC-8D10-1DF6FA5527B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codibly.Services.Mailer.Domain", "src/Codibly.Services.Mailer.Domain\Codibly.Services.Mailer.Domain.csproj", "{0BEBC4AC-C57E-48CC-8D10-1DF6FA5527B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codibly.Services.Mailer.Tests", "Codibly.Services.Mailer.Tests\Codibly.Services.Mailer.Tests.csproj", "{44166540-BCFE-418D-ABAB-18F62664FCF8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codibly.Services.Mailer.Tests", "tests/Codibly.Services.Mailer.Tests\Codibly.Services.Mailer.Tests.csproj", "{44166540-BCFE-418D-ABAB-18F62664FCF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codibly.Services.Mailer.Application", "Codibly.Services.Mailer.Application\Codibly.Services.Mailer.Application.csproj", "{F3E54E63-DBCB-457A-B1E5-740997F650FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codibly.Services.Mailer.Application", "src/Codibly.Services.Mailer.Application\Codibly.Services.Mailer.Application.csproj", "{F3E54E63-DBCB-457A-B1E5-740997F650FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
