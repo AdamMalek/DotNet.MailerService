@@ -1,0 +1,61 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\repos\\Codibly.Services.Mailer\\Codibly.Services.Mailer.Domain\\Codibly.Services.Mailer.Domain.csproj": {}
+  },
+  "projects": {
+    "C:\\repos\\Codibly.Services.Mailer\\Codibly.Services.Mailer.Domain\\Codibly.Services.Mailer.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\repos\\Codibly.Services.Mailer\\Codibly.Services.Mailer.Domain\\Codibly.Services.Mailer.Domain.csproj",
+        "projectName": "Codibly.Services.Mailer.Domain",
+        "projectPath": "C:\\repos\\Codibly.Services.Mailer\\Codibly.Services.Mailer.Domain\\Codibly.Services.Mailer.Domain.csproj",
+        "packagesPath": "C:\\Users\\Adam\\.nuget\\packages\\",
+        "outputPath": "C:\\repos\\Codibly.Services.Mailer\\Codibly.Services.Mailer.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Adam\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
