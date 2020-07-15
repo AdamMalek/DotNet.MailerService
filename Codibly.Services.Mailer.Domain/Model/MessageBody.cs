@@ -7,7 +7,7 @@ namespace Codibly.Services.Mailer.Domain.Model
         public string Body { get; }
         public bool IsHtml { get; }
 
-        public MessageBody(string body, bool isHtml = false)
+        internal MessageBody(string body, bool isHtml = false)
         {
             this.Body = body;
             this.IsHtml = isHtml;

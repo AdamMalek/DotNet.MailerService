@@ -1,6 +1,13 @@
-﻿namespace Codibly.Services.Mailer.Domain.Commands
+﻿using System.Threading.Tasks;
+
+namespace Codibly.Services.Mailer.Domain.Commands
 {
-    public abstract class Command
+    public interface ICommand
     {
+    }
+
+    public interface ICommandHandler<T> where T : ICommand
+    {
+        Task HandleCommandAsync(T command);
     }
 }
