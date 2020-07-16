@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Codibly.Services.Mailer.Domain.Model;
 using Codibly.Services.Mailer.Domain.Repositories;
@@ -22,9 +23,9 @@ namespace Codibly.Services.Mailer.Infrastructure.Repositories
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<EmailMessage>> GetPendingMessages()
+        public async Task<IEnumerable<EmailMessage>> GetPendingMessages()
         {
-            throw new System.NotImplementedException();
+            return Enumerable.Empty<EmailMessage>();
         }
     }
 }
