@@ -65,11 +65,13 @@ namespace Codibly.Services.Mailer.Domain.Model
 
         public void MarkAsSent()
         {
+            this.CheckIfNotSent();
             this.Status = MessageStatus.Sent;
         }
 
         public void AddRecipient(EmailAddress address)
         {
+            this.CheckIfNotSent();
             this.recipients.Add(address);
         }
 

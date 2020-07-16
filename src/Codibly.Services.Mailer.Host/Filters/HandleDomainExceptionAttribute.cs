@@ -12,7 +12,14 @@ namespace Codibly.Services.Mailer.Host.Filters
         {
             if (!context.ExceptionHandled && context.Exception is DomainException de)
             {
-                context.Result = new BadRequestObjectResult(ApiErrorResponse.ForErrors(de.Message));
+                if (de is InvalidEmailMessageException)
+                {
+                    context.Result = new NotFoundResult();
+                }
+                else
+                {
+                    context.Result = new BadRequestObjectResult(ApiErrorResponse.ForErrors(de.Message));
+                }
             }
         }
     }

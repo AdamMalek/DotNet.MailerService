@@ -1,5 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Codibly.Services.Mailer.Application.Commands;
+using Codibly.Services.Mailer.Application.Dto;
+using Codibly.Services.Mailer.Application.Queries;
+using Codibly.Services.Mailer.Domain.Exceptions;
+using Codibly.Services.Mailer.Domain.Model;
+using Codibly.Services.Mailer.Host.Dto;
 using Codibly.Services.Mailer.Host.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -8,40 +15,41 @@ namespace Codibly.Services.Mailer.Host.Controllers
 {
     [ApiController]
     [HandleDomainException]
-    [Route("api/[controller]")]
-    public class MessagesController
+    [Route("api/messages")]
+    public class MessagesController : ControllerBase
     {
-        private readonly IMediator _mediator;
+        private readonly IMediator mediator;
 
         public MessagesController(IMediator mediator)
         {
-            _mediator = mediator;
+            this.mediator = mediator;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<int>> Get()
+        public async Task<IEnumerable<EmailMessageDto>> Get()
         {
-            return new[] {1};
+            return await this.mediator.Send(new GetAllEmailMessages());
         }
 
-
-        [HttpGet("pending")]
-        public async Task<IEnumerable<int>> GetPending()
+        [HttpGet("{id}/details")]
+        public async Task<EmailMessageDto> GetDetails(string id)
         {
-            return new[] {1, 2};
+            return await this.mediator.Send(new GetEmailMessageDetails(new EmailMessageId(id)));
         }
 
-        [HttpPost("pending")]
-        public async Task<IEnumerable<int>> PostPending()
+        [HttpGet("{id}/status")]
+        public async Task<GetStatusResponseDto> GetStatus(string id)
         {
-            return new[] {1, 2};
+            var status = await this.mediator.Send(new GetEmailMessageStatus(new EmailMessageId(id)));
+            return new GetStatusResponseDto(id, status);
         }
-        //
-        // [HttpGet("test")]
-        // public async Task<int> Post()
-        // {
-        //     await this._mediator.Send(new CreateEmailMessage(null, null, null, null, false, null));
-        //     return 1;
-        // }
+
+        [HttpPost]
+        public async Task<ActionResult> PostPending([FromBody] CreateMessageDto request)
+        {
+            await this.mediator.Send(new CreateEmailMessage(request.Subject, request.Body, request.IsHtml,
+                request.Sender, false, request.Recipients));
+            return this.Ok();
+        }
     }
 }
