@@ -1,4 +1,5 @@
 using System;
+using Codibly.Services.Mailer.Domain.Exceptions;
 using Codibly.Services.Mailer.Domain.Model;
 using NUnit.Framework;
 
@@ -29,7 +30,7 @@ namespace Codibly.Services.Mailer.Tests.Domain
             [Values("fdsafds", "", "fdsa_pl", "testtest.com", "😀@test.com")]
             string emailAddress)
         {
-            Assert.Catch<ArgumentException>(() => { EmailAddress.Create(emailAddress); });
+            Assert.Catch<InvalidEmailAddressException>(() => { EmailAddress.Create(emailAddress); });
         }
     }
 }

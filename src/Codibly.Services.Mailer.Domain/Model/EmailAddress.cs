@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using Codibly.Services.Mailer.Domain.Exceptions;
 
 namespace Codibly.Services.Mailer.Domain.Model
 {
@@ -22,7 +23,7 @@ namespace Codibly.Services.Mailer.Domain.Model
 
             if (IsValid(emailAddress) == false)
             {
-                throw new ArgumentException("Provided e-mail address is not correct", nameof(emailAddress));
+                throw new InvalidEmailAddressException(emailAddress);
             }
 
             return new EmailAddress(emailAddress);

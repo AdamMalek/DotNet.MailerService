@@ -47,8 +47,8 @@ namespace Codibly.Services.Mailer.Host
 
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Codibly.Services.Mailer"); });
 
-            app.UseHttpsRedirection();
-
+            // app.UseHttpsRedirection();
+            
             app.UseRouting();
 
             app.UseAuthorization();
