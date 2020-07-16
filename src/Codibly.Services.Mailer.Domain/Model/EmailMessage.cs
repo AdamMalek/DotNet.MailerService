@@ -65,7 +65,6 @@ namespace Codibly.Services.Mailer.Domain.Model
 
         public void MarkAsSent()
         {
-            this.CheckIfNotSent();
             this.Status = MessageStatus.Sent;
         }
         
