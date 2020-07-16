@@ -1,5 +1,5 @@
 Things that I have not included, but I would like to include to consider it better:
-- distributed logging
+- centralized logging
 - service registry integration
 - some kind of key vault to store smtp credentials / db connection string
 - db transaction at command handler level
