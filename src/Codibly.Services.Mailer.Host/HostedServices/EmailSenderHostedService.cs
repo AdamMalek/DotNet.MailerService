@@ -18,7 +18,8 @@ namespace Codibly.Services.Mailer.Host.HostedServices
         private readonly IEmailSender sender;
         private readonly IEmailRepository emailRepository;
 
-        public EmailSenderHostedService(ILogger<EmailSenderHostedService> logger, IMediator mediator, IEmailSender sender, IEmailRepository emailRepository)
+        public EmailSenderHostedService(ILogger<EmailSenderHostedService> logger, IMediator mediator,
+            IEmailSender sender, IEmailRepository emailRepository)
         {
             this.logger = logger;
             this.mediator = mediator;
@@ -35,14 +36,14 @@ namespace Codibly.Services.Mailer.Host.HostedServices
                     var messages = (await this.emailRepository.GetPendingMessages()).ToList();
                     if (messages.Any())
                     {
-                        var publishTasks = messages.Select(om => this.sender.SendAsync()).ToArray();
+                        var publishTasks = messages.Select(em => this.sender.SendAsync()).ToArray();
                         await Task.WhenAll(publishTasks);
-                        await this.mediator.Send(new MarkMessagesAsSent(messages.Select(x=> x.Id)));
-                        this.logger.LogInformation($"Sent {publishTasks.Length} messages");
+                        await this.mediator.Send(new MarkMessagesAsSent(messages.Select(x => x.Id)), stoppingToken);
+                        this.logger.LogInformation($"Sent {publishTasks.Length} message(s)");
                     }
                     else
                     {
-                       this.logger.LogInformation("No messages to send"); 
+                        this.logger.LogInformation("No messages to send");
                     }
                 }
                 catch (Exception e)

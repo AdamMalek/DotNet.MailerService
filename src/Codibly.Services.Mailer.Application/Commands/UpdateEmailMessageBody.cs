@@ -20,7 +20,7 @@ namespace Codibly.Services.Mailer.Application.Commands
         public string Body { get; }
         public bool IsHtmlBody { get; }
         
-        class Handler: ICommandHandler<UpdateEmailMessageBody>
+        class Handler: ICommandHandler<UpdateEmailMessageBody, Unit>
         {
             private readonly IEmailRepository repository;
 
@@ -33,7 +33,7 @@ namespace Codibly.Services.Mailer.Application.Commands
                 var message = await this.repository.GetMessageByIdAsync(command.Id);
                 if (message == null)
                 {
-                    throw new InvalidEmailMessageException();
+                    throw new InvalidEmailMessageException(command.Id);
                 }
 
                 var body = command.IsHtmlBody

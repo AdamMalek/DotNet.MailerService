@@ -2,11 +2,15 @@
 
 namespace Codibly.Services.Mailer.Application.Commands
 {
-    public interface ICommand: IRequest
+    public interface ICommand: IRequest<Unit>
     {
     }
     
-    public interface ICommandHandler<in T> : IRequestHandler<T> where T : IRequest
+    public interface ICommand<out TResult>: IRequest<TResult>
+    {
+    }
+    
+    public interface ICommandHandler<in T,TResult> : IRequestHandler<T,TResult> where T : IRequest<TResult>
     {
     }
 }

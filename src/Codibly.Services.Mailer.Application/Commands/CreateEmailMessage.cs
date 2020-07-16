@@ -28,7 +28,7 @@ namespace Codibly.Services.Mailer.Application.Commands
             this.Recipients = recipients;
         }
 
-        public class Handler : ICommandHandler<CreateEmailMessage>
+        public class Handler : ICommandHandler<CreateEmailMessage, Unit>
         {
             private readonly IEmailRepository repository;
 

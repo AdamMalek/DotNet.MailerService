@@ -16,7 +16,7 @@ namespace Codibly.Services.Mailer.Application.Commands
             this.MessageIds = messageIds;
         }
         
-        public class Handler: ICommandHandler<MarkMessagesAsSent>
+        public class Handler: ICommandHandler<MarkMessagesAsSent, Unit>
         {
             private readonly IEmailRepository emailRepository;
 

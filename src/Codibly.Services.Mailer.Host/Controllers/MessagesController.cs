@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Codibly.Services.Mailer.Application.Commands;
+using Codibly.Services.Mailer.Host.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Codibly.Services.Mailer.Host.Controllers
 {
     [ApiController]
+    [HandleDomainException]
     [Route("api/[controller]")]
     public class MessagesController
     {
@@ -35,12 +37,12 @@ namespace Codibly.Services.Mailer.Host.Controllers
         {
             return new[] {1, 2};
         }
-
-        [HttpPost]
-        public async Task<int> Post()
-        {
-            await this._mediator.Send(new CreateEmailMessage(null, null, null, null, true, null));
-            return 1;
-        }
+        //
+        // [HttpGet("/test")]
+        // public async Task<int> Post()
+        // {
+        //     await this._mediator.Send(new CreateEmailMessage(null, null, null, null, false, null));
+        //     return 1;
+        // }
     }
 }

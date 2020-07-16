@@ -18,7 +18,7 @@ namespace Codibly.Services.Mailer.Application.Commands
         public EmailMessageId Id { get; }
         public string Subject { get; }
         
-        class Handler: ICommandHandler<UpdateEmailMessageSubject>
+        class Handler: ICommandHandler<UpdateEmailMessageSubject, Unit>
         {
             private readonly IEmailRepository repository;
 
@@ -31,7 +31,7 @@ namespace Codibly.Services.Mailer.Application.Commands
                 var message = await this.repository.GetMessageByIdAsync(command.Id);
                 if (message == null)
                 {
-                    throw new InvalidEmailMessageException();
+                    throw new InvalidEmailMessageException(command.Id);
                 }
                 
                 message.UpdateSubject(command.Subject);

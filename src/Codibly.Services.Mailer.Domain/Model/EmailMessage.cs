@@ -56,10 +56,10 @@ namespace Codibly.Services.Mailer.Domain.Model
 
         public void FinalizeMessage()
         {
-            if (this.recipients.Any() == false) throw new NoRecipientsException();
-            if (this.Sender is null) throw new NoSenderException();
-            if (this.Body is null) throw new EmptyMessageBodyException();
-            if (string.IsNullOrWhiteSpace(Subject)) throw new EmptySubjectException();
+            if (this.recipients.Any() == false) throw new NoRecipientsException(this.Id );
+            if (this.Sender is null) throw new NoSenderException(this.Id);
+            if (this.Body is null) throw new EmptyMessageBodyException(this.Id);
+            if (string.IsNullOrWhiteSpace(Subject)) throw new EmptySubjectException(this.Id);
 
             this.Status = MessageStatus.Queued;
         }
@@ -90,7 +90,7 @@ namespace Codibly.Services.Mailer.Domain.Model
             this.CheckIfNotSent();
             if (string.IsNullOrWhiteSpace(subject))
             {
-                throw new EmptySubjectException();
+                throw new EmptySubjectException(this.Id);
             }
 
             this.Subject = subject;
@@ -100,7 +100,7 @@ namespace Codibly.Services.Mailer.Domain.Model
         {
             if (this.Status != MessageStatus.Pending)
             {
-                throw new MessageAlreadySentException();
+                throw new MessageAlreadySentException(this.Id);
             }
         }
     }
