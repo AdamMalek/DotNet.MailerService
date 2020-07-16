@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Codibly.Services.Mailer.Application.Commands;
 using Codibly.Services.Mailer.Host.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -26,19 +25,19 @@ namespace Codibly.Services.Mailer.Host.Controllers
         }
 
 
-        [HttpGet("/pending")]
+        [HttpGet("pending")]
         public async Task<IEnumerable<int>> GetPending()
         {
             return new[] {1, 2};
         }
 
-        [HttpPost("/pending")]
+        [HttpPost("pending")]
         public async Task<IEnumerable<int>> PostPending()
         {
             return new[] {1, 2};
         }
         //
-        // [HttpGet("/test")]
+        // [HttpGet("test")]
         // public async Task<int> Post()
         // {
         //     await this._mediator.Send(new CreateEmailMessage(null, null, null, null, false, null));
