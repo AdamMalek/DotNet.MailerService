@@ -11,4 +11,4 @@ Things that I would do to increase daily sent mails count to few millions per da
 - Asynchronous communication + horizontal scaling
 - Full CQRS - denormalized read model synchronized by domain events
 
-To launch run command: `docker-compose up`
+To start provide credentials in `appsettings.json` and run command: `docker-compose up`
