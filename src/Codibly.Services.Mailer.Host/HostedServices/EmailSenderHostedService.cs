@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Codibly.Services.Mailer.Application.Commands;
+using Codibly.Services.Mailer.Application.Dto;
 using Codibly.Services.Mailer.Application.Services;
 using Codibly.Services.Mailer.Domain.Repositories;
 using MediatR;
@@ -16,10 +17,10 @@ namespace Codibly.Services.Mailer.Host.HostedServices
         private readonly ILogger logger;
         private readonly IMediator mediator;
         private readonly IEmailSender sender;
-        private readonly IEmailRepository emailRepository;
+        private readonly IEmailQueueRepository emailRepository;
 
         public EmailSenderHostedService(ILogger<EmailSenderHostedService> logger, IMediator mediator,
-            IEmailSender sender, IEmailRepository emailRepository)
+            IEmailSender sender, IEmailQueueRepository emailRepository)
         {
             this.logger = logger;
             this.mediator = mediator;
@@ -33,10 +34,10 @@ namespace Codibly.Services.Mailer.Host.HostedServices
             {
                 try
                 {
-                    var messages = (await this.emailRepository.GetPendingMessages()).ToList();
+                    var messages = (await this.emailRepository.GetQueuedMessages()).ToList();
                     if (messages.Any())
                     {
-                        var publishTasks = messages.Select(em => this.sender.SendAsync()).ToArray();
+                        var publishTasks = messages.Select(em => this.sender.SendAsync(new FinalizedEmailMessageDto(em))).ToArray();
                         await Task.WhenAll(publishTasks);
                         await this.mediator.Send(new MarkMessagesAsSent(messages.Select(x => x.Id)), stoppingToken);
                         this.logger.LogInformation($"Sent {publishTasks.Length} message(s)");

@@ -1,5 +1,6 @@
 using Codibly.Services.Mailer.Application.Commands;
 using Codibly.Services.Mailer.Infrastructure;
+using Codibly.Services.Mailer.Infrastructure.Options;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,8 +23,11 @@ namespace Codibly.Services.Mailer.Host
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddInfrastructure();
-            
+            var emailSenderOptions = new EmailSenderOptions();
+            this.Configuration.GetSection("EmailSender").Bind(emailSenderOptions);
+            services.AddInfrastructure(new MongoConnectionString(this.Configuration.GetConnectionString("MongoDb")),
+                emailSenderOptions);
+
             services.AddMediatR(typeof(Startup), typeof(ICommand));
             services.AddControllers();
             services.AddSwaggerGen(c =>
