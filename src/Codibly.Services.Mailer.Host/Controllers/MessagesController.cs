@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Codibly.Services.Mailer.Application.Commands;
 using Codibly.Services.Mailer.Application.Dto;
 using Codibly.Services.Mailer.Application.Queries;
-using Codibly.Services.Mailer.Domain.Exceptions;
 using Codibly.Services.Mailer.Domain.Model;
 using Codibly.Services.Mailer.Host.Dto;
 using Codibly.Services.Mailer.Host.Filters;
@@ -31,6 +29,14 @@ namespace Codibly.Services.Mailer.Host.Controllers
             return await this.mediator.Send(new GetAllEmailMessages());
         }
 
+        [HttpPost]
+        public async Task<ActionResult> Post([FromBody] CreateMessageDto request)
+        {
+            await this.mediator.Send(new CreateEmailMessage(request.Subject, request.Body, request.IsHtml,
+                request.Sender, false, request.Recipients));
+            return this.Ok();
+        }
+
         [HttpGet("{id}/details")]
         public async Task<EmailMessageDto> GetDetails(string id)
         {
@@ -42,14 +48,6 @@ namespace Codibly.Services.Mailer.Host.Controllers
         {
             var status = await this.mediator.Send(new GetEmailMessageStatus(new EmailMessageId(id)));
             return new GetStatusResponseDto(id, status);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> PostPending([FromBody] CreateMessageDto request)
-        {
-            await this.mediator.Send(new CreateEmailMessage(request.Subject, request.Body, request.IsHtml,
-                request.Sender, false, request.Recipients));
-            return this.Ok();
         }
     }
 }

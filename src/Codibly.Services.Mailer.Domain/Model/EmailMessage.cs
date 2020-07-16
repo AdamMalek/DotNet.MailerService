@@ -10,7 +10,7 @@ namespace Codibly.Services.Mailer.Domain.Model
         public string Subject { get; private set; }
         public MessageBody Body { get; private set; }
         public MessageStatus Status { get; private set; }
-        public EmailAddress Sender { get; }
+        public EmailAddress Sender { get; private set; }
         
         private readonly HashSet<EmailAddress> recipients = new HashSet<EmailAddress>();
         public IEnumerable<EmailAddress> Recipients => this.recipients.AsEnumerable();
@@ -67,6 +67,12 @@ namespace Codibly.Services.Mailer.Domain.Model
         {
             this.CheckIfNotSent();
             this.Status = MessageStatus.Sent;
+        }
+        
+        public void UpdateSender(EmailAddress sender)
+        {
+            this.CheckIfNotSent();
+            this.Sender = sender;
         }
 
         public void AddRecipient(EmailAddress address)
