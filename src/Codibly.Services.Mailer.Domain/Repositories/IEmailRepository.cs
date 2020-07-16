@@ -11,5 +11,6 @@ namespace Codibly.Services.Mailer.Domain.Repositories
         Task InsertMessageAsync(EmailMessage message);
         Task UpdateMessageAsync(EmailMessage message);
         Task<IEnumerable<EmailMessage>> GetPendingMessages();
+        Task<IEnumerable<EmailMessage>> GetAllMessages();
     }
 }

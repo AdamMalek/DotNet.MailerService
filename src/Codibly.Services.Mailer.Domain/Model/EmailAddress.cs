@@ -56,5 +56,7 @@ namespace Codibly.Services.Mailer.Domain.Model
 
         public bool Equals(EmailAddress other) =>
             this.Value.Equals(other?.Value, StringComparison.InvariantCultureIgnoreCase);
+
+        public override string ToString() => this.Value;
     }
 }

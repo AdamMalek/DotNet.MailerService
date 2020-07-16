@@ -27,5 +27,10 @@ namespace Codibly.Services.Mailer.Infrastructure.Repositories
         {
             return Enumerable.Empty<EmailMessage>();
         }
+
+        public async Task<IEnumerable<EmailMessage>> GetAllMessages()
+        {
+            return Enumerable.Empty<EmailMessage>();
+        }
     }
 }
