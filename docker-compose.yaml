@@ -1,9 +1,9 @@
 version: "3.7"
 
 services:
- mongo:
+  mongo:
     image: mongo
-    container_name: mongo
+    container_name: mailermongo
     restart: unless-stopped
     # environment:
     #  - MONGO_INITDB_ROOT_USERNAME=admin
@@ -12,6 +12,12 @@ services:
       - mongo:/data/db
     ports:
       - "27017:27017"
+      
+  mailer:
+    build: ./
+    ports: 
+      - "80:80"
+       
 
 volumes:
   mongo:
