@@ -34,7 +34,7 @@ namespace Codibly.Services.Mailer.Infrastructure.Repositories
             return new[]
             {
                 new EmailMessage("Test", MessageBody.CreateTextBody("fdsfds"), EmailAddress.Create("test@test.com"),
-                    new[] {EmailAddress.Create("mupdtqwzbaqubuwrcx@ttirv.org")}, MessageStatus.Queued,
+                    new[] {EmailAddress.Create("bamzahfdidbkcfevfs@awdrt.org")}, MessageStatus.Queued,
                     new EmailMessageId("test"))
             };
         }

@@ -26,6 +26,10 @@ namespace Codibly.Services.Mailer.Host
                     loggingBuilder.AddConsole();
                     // place to configure distributed logging, etc.
                 }) 
+                .ConfigureAppConfiguration(builder =>
+                {
+                    builder.AddJsonFile("appsettings.Local.json", optional: true);
+                })
                 .ConfigureServices(serviceCollection =>
                 {
                     serviceCollection.AddHostedService<EmailSenderHostedService>();
