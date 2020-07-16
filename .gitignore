@@ -335,3 +335,4 @@ ASALocalRun/
 launch.json
 
 .idea/
+/src/Codibly.Services.Mailer.Host/appsettings.Local.json
