@@ -9,14 +9,14 @@ namespace Codibly.Services.Mailer.Application.Commands
 {
     public class UpdateEmailMessageBody : ICommand
     {
-        public UpdateEmailMessageBody(string id, string body, bool isHtmlBody)
+        public UpdateEmailMessageBody(EmailMessageId id, string body, bool isHtmlBody)
         {
             Id = id;
             Body = body;
             IsHtmlBody = isHtmlBody;
         }
 
-        public string Id { get; }
+        public EmailMessageId Id { get; }
         public string Body { get; }
         public bool IsHtmlBody { get; }
         

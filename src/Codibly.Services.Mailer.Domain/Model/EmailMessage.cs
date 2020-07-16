@@ -7,13 +7,13 @@ namespace Codibly.Services.Mailer.Domain.Model
 {
     public class EmailMessage
     {
-        public string Id { get; private set; }
+        public EmailMessageId Id { get; }
         public string Subject { get; private set; }
         public MessageBody Body { get; private set; }
         public MessageStatus Status { get; private set; }
-        public EmailAddress Sender { get; private set; }
+        public EmailAddress Sender { get; }
+        
         private readonly HashSet<EmailAddress> recipients = new HashSet<EmailAddress>();
-
         public IEnumerable<EmailAddress> Recipients => this.recipients.AsEnumerable();
 
         // Skipped Cc & Bcc for simplicity     
@@ -22,7 +22,7 @@ namespace Codibly.Services.Mailer.Domain.Model
         }
 
         internal EmailMessage(string subject, MessageBody body, EmailAddress sender, IEnumerable<EmailAddress> recipients,
-            MessageStatus status = MessageStatus.Pending, string id = null)
+            MessageStatus status = MessageStatus.Pending, EmailMessageId id = null)
         {
             this.Id = id;
             this.Subject = subject;

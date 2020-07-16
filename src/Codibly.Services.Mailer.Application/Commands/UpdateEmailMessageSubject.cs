@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Codibly.Services.Mailer.Domain.Exceptions;
+using Codibly.Services.Mailer.Domain.Model;
 using Codibly.Services.Mailer.Domain.Repositories;
 using MediatR;
 
@@ -8,13 +9,13 @@ namespace Codibly.Services.Mailer.Application.Commands
 {
     public class UpdateEmailMessageSubject : ICommand
     {
-        public UpdateEmailMessageSubject(string id, string subject)
+        public UpdateEmailMessageSubject(EmailMessageId id, string subject)
         {
             Id = id;
             Subject = subject;
         }
 
-        public string Id { get; }
+        public EmailMessageId Id { get; }
         public string Subject { get; }
         
         class Handler: ICommandHandler<UpdateEmailMessageSubject>
