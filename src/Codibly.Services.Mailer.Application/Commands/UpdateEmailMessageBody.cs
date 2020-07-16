@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Codibly.Services.Mailer.Domain.Exceptions;
 using Codibly.Services.Mailer.Domain.Model;
 using Codibly.Services.Mailer.Domain.Repositories;
 using MediatR;
@@ -20,28 +19,22 @@ namespace Codibly.Services.Mailer.Application.Commands
         public string Body { get; }
         public bool IsHtmlBody { get; }
         
-        class Handler: ICommandHandler<UpdateEmailMessageBody, Unit>
+        class Handler: CommandHandler<UpdateEmailMessageBody, Unit>
         {
-            private readonly IEmailRepository repository;
-
-            public Handler(IEmailRepository repository)
+            public Handler(IEmailRepository repository):base(repository)
             {
-                this.repository = repository;
             }
-            public async Task<Unit> Handle(UpdateEmailMessageBody command, CancellationToken cancellationToken)
+            
+            public override async Task<Unit> Handle(UpdateEmailMessageBody command, CancellationToken cancellationToken)
             {
-                var message = await this.repository.GetMessageByIdAsync(command.Id);
-                if (message == null)
-                {
-                    throw new InvalidEmailMessageException(command.Id);
-                }
+                var message = await this.GetMessageById(command.Id);
 
                 var body = command.IsHtmlBody
                     ? MessageBody.CreateHtmlBody(command.Body)
                     : MessageBody.CreateTextBody(command.Body);
                 
                 message.UpdateBody(body);
-                await this.repository.UpdateMessageAsync(message);
+                await this.emailRepository.UpdateMessageAsync(message);
                 
                 return Unit.Value;
             }

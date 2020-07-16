@@ -17,7 +17,6 @@ namespace Codibly.Services.Mailer.Tests.Domain
             Assert.That(instance.Value, Is.EqualTo(emailAddress));
         }
 
-
         [Test]
         public void GivenNullEmailAddress_ShouldReturnNull()
         {

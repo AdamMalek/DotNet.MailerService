@@ -12,7 +12,7 @@ namespace Codibly.Services.Mailer.Infrastructure
         {
             serviceCollection.AddTransient<IEmailRepository, EmailRepository>();
             serviceCollection.AddTransient<IEmailSender, EmailSender>();
-            
+
             return serviceCollection;
         }
     }
