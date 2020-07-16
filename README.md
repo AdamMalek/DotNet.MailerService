@@ -7,6 +7,7 @@ Things that I have not included, but I would like to include to consider it bett
 - optimistic concurrency by entity versioning
 - rest request validation aside from domain checks
 - better implementations of IEmailSender and IEmailrepository
+- pagination for all/pending messages list
 
 Things that I would do to increase daily sent mails count to few millions per day:
 - Asynchronous communication + horizontal scaling

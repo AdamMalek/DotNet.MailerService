@@ -17,7 +17,6 @@ namespace Codibly.Services.Mailer.Application.Dto
             this.Recipients = message.Recipients.Select(x => x.ToString()).ToArray();
         }
 
-
         public string Id { get; }
         public string Subject { get; }
         public string Body { get; }

@@ -32,6 +32,7 @@ namespace Codibly.Services.Mailer.Application.Commands
                    {
                        message.FinalizeMessage();
                        successCount++;
+                       await this.emailRepository.UpdateMessageAsync(message);
                    }
                    catch (DomainException e)
                    {

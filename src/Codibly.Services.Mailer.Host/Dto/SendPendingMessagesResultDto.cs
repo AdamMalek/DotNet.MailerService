@@ -9,7 +9,7 @@ namespace Codibly.Services.Mailer.Host.Dto
         public int SuccessCount { get; }
         public string[] Errors { get; }
 
-        public SendPendingMessagesResultDto(int successCount, IEnumerable<string> errors)
+        public SendPendingMessagesResultDto(int successCount, ICollection<string> errors)
         {
             SuccessCount = successCount;
             Errors = errors.ToArray();
