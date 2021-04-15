@@ -1,3 +1,5 @@
+That project was a recruitment task, I thought that I'll leave it as public as I am pretty happy about it.
+
 Things that I have not included, but I would like to include to consider it better:
 - centralized logging
 - service registry integration
